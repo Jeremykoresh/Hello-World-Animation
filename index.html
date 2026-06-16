@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Animated Text - Hello World</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", "Segoe UI", sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at top, #1f3cff 0%, transparent 35%),
+        radial-gradient(circle at bottom, #ff2fb3 0%, transparent 35%),
+        linear-gradient(135deg, #050816, #0a1025 50%, #050816);
+    }
+
+    .wrap {
+      position: relative;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .text {
+      position: relative;
+      display: inline-block;
+      font-size: clamp(2.5rem, 8vw, 7rem);
+      font-weight: 800;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      background: linear-gradient(90deg, #00f5ff, #ffffff, #ff4fd8, #00f5ff);
+      background-size: 300% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: gradientMove 4s linear infinite, float 3s ease-in-out infinite;
+      filter: drop-shadow(0 0 12px rgba(0, 245, 255, 0.45))
+              drop-shadow(0 0 24px rgba(255, 79, 216, 0.25));
+      z-index: 2;
+    }
+
+    .text::before,
+    .text::after {
+      content: attr(data-text);
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      opacity: 0.7;
+    }
+
+    .text::before {
+      color: #00f5ff;
+      transform: translate(3px, -3px);
+      animation: glitch1 1.8s infinite linear alternate-reverse;
+    }
+
+    .text::after {
+      color: #ff4fd8;
+      transform: translate(-3px, 3px);
+      animation: glitch2 1.4s infinite linear alternate-reverse;
+    }
+
+    .subtitle {
+      margin-top: 18px;
+      font-size: 1rem;
+      color: rgba(255,255,255,0.75);
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      animation: fadeIn 2s ease forwards;
+    }
+
+    .glow {
+      position: absolute;
+      width: 320px;
+      height: 320px;
+      background: radial-gradient(circle, rgba(0,245,255,0.18), transparent 70%);
+      filter: blur(20px);
+      animation: pulse 4s ease-in-out infinite;
+      z-index: 0;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .shine {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(
+        120deg,
+        transparent 20%,
+        rgba(255,255,255,0.15) 35%,
+        transparent 50%
+      );
+      transform: translateX(-120%);
+      animation: shine 3.5s ease-in-out infinite;
+    }
+
+    @keyframes gradientMove {
+      0%   { background-position: 0% 50%; }
+      100% { background-position: 300% 50%; }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    @keyframes glitch1 {
+      0%   { clip-path: inset(0 0 85% 0); }
+      20%  { clip-path: inset(20% 0 45% 0); }
+      40%  { clip-path: inset(45% 0 35% 0); }
+      60%  { clip-path: inset(10% 0 70% 0); }
+      80%  { clip-path: inset(60% 0 10% 0); }
+      100% { clip-path: inset(0 0 85% 0); }
+    }
+
+    @keyframes glitch2 {
+      0%   { clip-path: inset(80% 0 0 0); }
+      20%  { clip-path: inset(55% 0 18% 0); }
+      40%  { clip-path: inset(20% 0 60% 0); }
+      60%  { clip-path: inset(35% 0 40% 0); }
+      80%  { clip-path: inset(8% 0 75% 0); }
+      100% { clip-path: inset(80% 0 0 0); }
+    }
+
+    @keyframes shine {
+      0%   { transform: translateX(-120%) skewX(-20deg); }
+      50%  { transform: translateX(120%) skewX(-20deg); }
+      100% { transform: translateX(120%) skewX(-20deg); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.55; }
+      50% { transform: translate(-50%, -50%) scale(1.18); opacity: 0.9; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="glow"></div>
+    <h1 class="text" data-text="HELLO WORLD">HELLO WORLD</h1>
+    <div class="subtitle">animated text effect</div>
+    <div class="shine"></div>
+  </div>
+</body>
+</html>
