@@ -40,7 +40,7 @@ hello-world-animation/
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/Jeremykoresh/hello-world-animation.git
+git clone https://github.com/Jeremykoresh/Hello-World-Animation.git
 ```
 
 ### Open the Project
